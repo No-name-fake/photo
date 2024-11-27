@@ -1,7 +1,7 @@
-<!-- ベーステンプレートを適用する -->
+<!-- ベーステンプレートを適用する -->                         <!-- お気に入り投稿 -->
 {% extends 'base.html' %}
 <!-- ヘッダー情報のページタイトルを設定する -->
-{% block title %}Post{% endblock %}
+{% block title %}ポケポケブログ{% endblock %}
 
       {% block contents %}
       <!-- Bootstrapのグリッドシステム -->
@@ -36,6 +36,14 @@
                 <tr>
                   <th>画像2</th>
                   <td>{{ form.image2 }}</td>
+                </tr>
+                <tr>
+                  <th>画像3</th>
+                  <td>{{ form.image3 }}</td>
+                </tr>
+                <tr>
+                  <th>画像4</th>
+                  <td>{{ form.image4 }}</td>
                 </tr>
               </table>
               <hr>

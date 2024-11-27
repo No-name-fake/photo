@@ -1,0 +1,38 @@
+<!-- ベーステンプレートを適用する -->                                       <!-- お気に入り -->
+{% extends 'base.html' %}
+<!-- ヘッダー情報のページタイトルを設定する -->
+{% block title %}ポケポケブログ{% endblock %}
+
+      {% block contents %}
+        <!-- タイトルとナビゲーションボタン -->
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <!-- タイトルと本文 -->
+                <h1 class="fw-light">お気に入り</h1>
+                <p class="lead text-muted">
+                お気に入りのカードを</p>
+                <p class="lead text-muted">
+                コメントを添えて投稿することができます！</p>
+                <p>
+                <!-- ナビゲーションボタン -->
+                {% if user.is_authenticated %}
+                <!-- ログイン中のボタン -->
+                <a href="{% url "photo:post" %}"
+                    class="btn btn-primary my-2">投稿する</a>
+                {% else %}
+                <p>※投稿するにはログインしてください</p>
+                <a href="{% url 'accounts:login' %}"
+                class="btn btn-primary my-2">ログインはこちら</a>
+                {% endif %}
+                </p>
+            </div>
+            </div>
+        </section>
+
+      <!-- 投稿一覧テンプレートの組み込み -->
+      {% include "photos_list.html" %}
+      {% include "pagination.html" %}
+
+      
+      {% endblock %}

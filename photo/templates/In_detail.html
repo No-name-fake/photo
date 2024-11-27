@@ -1,0 +1,28 @@
+<!-- ベーステンプレートを適用する -->                           <!--index詳細はこちら-->
+{% extends 'base.html' %}
+<!-- ヘッダー情報のページタイトルを設定する -->
+{% block title %}ポケポケブログ{% endblock %}
+
+    {% block contents %}
+        <!-- タイトルとナビゲーションボタン -->
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <!-- タイトルと本文 -->
+                    <h1 class="fw-light">以下、本サイトの機能です</h1>
+                    <p>
+                    全カード閲覧</p>
+                    <p>
+                    分類別カード閲覧</p>
+                    <p>
+                    カード検索</p>
+                    <p>
+                    お気に入りカード投稿,閲覧</p>
+                    <p>
+                    所持カード登録,閲覧</p>
+                    <p class="lead text-">
+                    ※投稿,登録機能,所持カード閲覧はログイン中のみ使用可能</p>
+                </div>
+            </div>
+        </section>
+    {% endblock %}

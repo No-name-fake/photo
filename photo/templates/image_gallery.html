@@ -1,0 +1,41 @@
+{% extends 'base.html' %}                                       <!-- カード一覧 -->
+
+{% block title %}ポケポケブログ{% endblock %}
+
+{% block contents %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>カード一覧</title>
+    <style>
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);  /* 横に3つ表示 */
+            gap: 10px;
+            justify-content: center;
+        }
+        .gallery-item {
+            text-align: center;
+        }
+        .gallery img {
+            width: 300px;  /* 画像の幅を200pxに設定 */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>カード一覧</h1>
+    <div class="gallery">
+        {% for image in page_obj %}
+            <div class="gallery-item">
+                <a href="{{ image.url }}" target="_blank">
+                    <img src="{{ image.url }}" alt="{{ image.name }}">
+                </a>
+                <h2>{{ card.name }}</h2>
+            </div>
+        {% endfor %}
+    </div>
+    {% include 'pagination.html' %}
+</body>
+</html>
+{% endblock %}

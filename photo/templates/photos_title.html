@@ -1,12 +1,17 @@
-  <!-- タイトルとナビゲーションボタン -->
+  <!-- タイトルとナビゲーションボタン -->               <!-- ホームに表示 -->
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <!-- タイトルと本文 -->
-        <h1 class="fw-light">Photo Gallery</h1>
+        <h1 class="fw-light">ポケポケブログ</h1>
         <p class="lead text-muted">
-          コメントを見て写真に描かれた世界に思いを馳せましょう。
-          素敵な写真とコメントをお待ちしています!</p>
+          所持カードの登録、</p>
+        <p class="lead text-muted">
+          お気に入りの一枚の投稿ができます！</p>
+        <p>
+          <a href="{% url "photo:In_detail" %}"
+             >詳細はこちら</a>
+        </p>
         <p>
           <!-- ナビゲーションボタン -->
           {% if user.is_authenticated %}

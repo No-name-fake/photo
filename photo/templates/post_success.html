@@ -1,4 +1,4 @@
-<!-- ベーステンプレートを適用する -->
+<!-- ベーステンプレートを適用する -->                                       <!-- お気に入り投稿後に表示 -->
 {% extends 'base.html' %}
 
 <!-- ヘッダー情報のページタイトルを設定する -->
@@ -12,7 +12,9 @@
         <div class="row">
           <!-- 列の左右に余白offset-2を入れる -->
           <div class="col offset-2">
-            <h4>投稿が完了しました!</h4>  
+            <h4>投稿が完了しました!</h4>
+            <p><a href="{% url 'photo:post' %}">続けて投稿</a><p>
+            <p><a href="{% url 'photo:index' %}">Back to Top</a><p>
           </dv>
         </dv>
       </dv>

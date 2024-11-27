@@ -1,7 +1,7 @@
-<!-- ベーステンプレートを適用する -->
+<!-- ベーステンプレートを適用する -->                                         <!-- ホーム -->
 {% extends 'base.html' %}
 <!-- ヘッダー情報のページタイトルを設定する -->
-{% block title %}Photo Gallery{% endblock %}
+{% block title %}ポケポケブログ{% endblock %}
 
       {% block contents %}
       
@@ -9,8 +9,6 @@
       {% include "photos_title.html" %}
 
       <!-- 投稿一覧テンプレートの組み込み -->
-      {% include "photos_list.html" %}
-      {% include "pagination.html" %}
 
       
       {% endblock %}

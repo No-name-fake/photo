@@ -1,143 +1,76 @@
+
 <!-- 静的ファイルのURLを生成するstaticタグをロードする-->
 {% load static %}
 <!doctype html>
 <!-- 言語指定をenからjaに変更-->
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author"
-          content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- ヘッダー情報のタイトルを個別に設定できるようにする-->
     <title>{% block title %}{% endblock %}</title>
 
-    <!-- Bootstrap core CSS -->
-    <!-- Bootstrap core CSSを読み込むコードをBootstrapからコピー-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-          crossorigin="anonymous">
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>    
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   </head>
   
   <body>
-    <!-- ページのヘッダー-->
-    <header>
-      <!-- ナビゲーションバーのヘッダー-->
-      <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-              <!-- ヘッダーのタイトルと本文-->
-              <h4 class="text-white">お気に入りを見つけよう！</h4>
-              <p class="text-muted">
-                誰でも参加できる写真投稿サイトです。
-                自分で撮影した写真なら何でもオッケー！
-                でも、カテゴリに属する写真に限ります。
-                コメントも付けてください！
-              </p>
-            </div>
-            <div class="col-sm-4 offset-md-1 py-4">
-              <h4 class="text-white">Contact</h4>
-              <ul class="list-unstyled">
-                <!-- ナビゲーションメニュー-->
-                {% if user.is_authenticated %}
-                <!-- ログイン中のメニュー-->
-                <li><a href="{% url "photo:mypage" %}"
-                       class="text-white">マイページ</a></li>
-                <li><a href="{% url 'accounts:logout' %}"
-                       class="text-white">ログアウト</a></li>
-                <li><a href="{% url 'password_reset' %}"
-                       class="text-white">パスワードのリセット</a></li>
-                <li><a href="mailto:admin@example.com"
-                       class="text-white">Email me</a></li>
-                {% else %}
-                <!-- ログイン状態ではない場合のメニュー-->
-                <li><a href="{% url 'accounts:signup' %}"
-                       class="text-white">サインアップ</a></li>
-                <li><a href="{% url 'accounts:login' %}"
-                       class="text-white">ログイン</a></li>
-                <li><a href="mailto:admin@example.com"
-                       class="text-white">Email me</a></li>
-                {% endif %}
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar-->
+      <div class="border-end bg-white" id="sidebar-wrapper">
+        <div class="sidebar-heading border-bottom bg-light">ポケポケブログ</div>
+        <div class="list-group list-group-flush">
+          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'photo:image_gallery' %}">カード一覧</a>
+          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'photo:image_list' %}">カード検索</a>
+          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'photo:favorite' %}">お気に入り</a>
+          {% if user.is_authenticated %}
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'photo:post' %}">お気に入り投稿</a>
+          {% endif %}
+        </div>
+      </div>
+      <!-- Page content wrapper-->
+      <div id="page-content-wrapper">
+        <!-- Top navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+          <div class="container-fluid">
+            <button class="btn btn-primary" id="sidebarToggle">メニュー</button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                <li class="nav-item active"><a class="nav-link" href="{% url 'photo:index' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'photo:contact' %}">お問い合わせ</a></li>
+                <li class="nav-item dropdown">
+                  {% if user.is_authenticated %}
+                  <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">アカウント</a>
+                  <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'photo:mypage' %}">マイページ</a>
+                    <a class="dropdown-item" href="{% url 'accounts:logout' %}">ログアウト</a>
+                    <a class="dropdown-item" href="{% url 'password_reset' %}">パスワードのリセット</a>
+                  </div>
+                  {% else %}
+                  <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">アカウント</a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{% url 'accounts:login' %}">ログイン</a>
+                      <a class="dropdown-item" href="{% url 'accounts:signup' %}">サインアップ</a>
+                    </div>
+                  {% endif %}
+                </li>
               </ul>
             </div>
           </div>
-        </div>
-      </div>
-      <!-- ナビゲーションバー-->
-      <div class="navbar navbar-dark bg-dark shadow-sm">
+        </nav>
+        <!-- Page content-->
         <div class="container">
-          <!-- トップページへのリンク-->
-          <a href="{% url 'photo:index' %}"
-             class="navbar-brand d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 width="20" height="20" fill="none"
-                 stroke="currentColor"
-                 stroke-linecap="round"
-                 stroke-linejoin="round"
-                 stroke-width="2"
-                 aria-hidden="true"
-                 class="me-2"
-                 viewBox="0 0 24 24">
-                 <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                 <circle cx="12" cy="13" r="4"/></svg>
-            <!-- リンクテキスト-->
-            <strong>Photo Gallery</strong>
-          </a>
-          <!-- トグルボタン-->
-          <button class="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarHeader"
-                  aria-controls="navbarHeader"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+          {% block contents %}{% endblock  %}
         </div>
       </div>
-    </header>
-    
-    <!-- メインコンテンツ-->
-    <main>
-      <!-- <main>タグの要素をすべて削除して以下に書き換え-->
-      <!-- メインコンテンツの本体部分は各ページのテンプレートで埋め込む-->
-      {% block contents %}{% endblock %}
-    </main>
-    
-    <!-- フッター -->
-    <footer class="text-muted py-5">
-      <div class="container">
-        <p class="float-end mb-1">
-          <a href="#">Back to top</a>
-        </p>
-        <!-- フッターのテキストを任意のものに書き換え-->
-        <p class="mb-1">
-          Photo Gallery is &copy; Bootstrap, but please post a lot!</p>
-      </div>
-    </footer>
-    
-    <!-- BootstrapからJavaScriptを読み込むコードをコピーして貼り付け-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>      
+    </div>
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Core theme JS-->
+  <script src="{% static 'js/scripts.js' %}"></script>
   </body>
 </html>

@@ -2,10 +2,9 @@ from django.contrib import admin
 from django.urls import path, include # include追加
 # auth.viewsをインポートしてauth_viewという記名で利用する
 from django.contrib.auth import views as auth_views
-
+from photo import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
     # photo.urlsへのURLパターン
     path('', include('photo.urls')),
     

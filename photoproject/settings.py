@@ -126,7 +126,7 @@ STATIC_URL = 'static/'
 
 # staticフォルダーのフルパスを設定
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Userモデルの代わりにCustomUserモデルを使用する
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
